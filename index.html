@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Birthday Party 🎂</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --pink: #ee765f;
+            --hot-pink: #d95f4c;
+            --yellow: #f4c95d;
+            --orange: #e89a4b;
+            --blue: #48b9bd;
+            --purple: #7382c6;
+            --green: #79b875;
+
+            --cream: #f8f5ed;
+            --dark: #34434a;
+            --cake-pink: #e98a78;
+            --cake-light: #f4c9a9;
+            --cake-yellow: #f4c95d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: "Fredoka", sans-serif;
+            color: var(--dark);
+            background:
+                radial-gradient(circle at 10% 15%, rgba(244, 201, 93, .35), transparent 18%),
+                radial-gradient(circle at 90% 20%, rgba(72, 185, 189, .22), transparent 20%),
+                radial-gradient(circle at 20% 85%, rgba(115, 130, 198, .18), transparent 20%),
+                linear-gradient(180deg, #f8f5ed 0%, #edf5f2 100%);
+        }
+
+        /* =========================================================
+           STREAMERS
+        ========================================================= */
+
+        .streamers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        .streamers-string {
+            width: 96%;
+            height: 20px;
+            margin: 0 auto;
+            border-top: 3px solid #b48b76;
+            border-radius: 50%;
+            opacity: .8;
+        }
+
+        .streamers-row {
+            display: flex;
+            justify-content: space-between;
+            margin: -6px 2% 0;
+        }
+
+        .pennant {
+            width: clamp(30px, 4.6vw, 54px);
+            height: clamp(38px, 5.8vw, 68px);
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            transform-origin: top center;
+            opacity: .85;
+            animation: pennantSwing 3s ease-in-out infinite;
+        }
+
+        .pennant:nth-child(4n + 1) { background: var(--pink); }
+        .pennant:nth-child(4n + 2) { background: var(--yellow); }
+        .pennant:nth-child(4n + 3) { background: var(--blue); }
+        .pennant:nth-child(4n + 4) { background: var(--purple); }
+
+        .pennant:nth-child(odd) { animation-delay: -1.5s; }
+
+        @keyframes pennantSwing {
+            0%, 100% {
+                transform: rotate(-3deg);
+            }
+
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        /* =========================================================
+           CONFETTI
+        ========================================================= */
+
+        #confetti {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .confetti {
+            position: absolute;
+            top: -30px;
+            width: 9px;
+            height: 15px;
+            border-radius: 3px;
+            opacity: .8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-40px) rotate(0deg);
+            }
+
+            to {
+                transform: translateY(110vh) rotate(720deg);
+            }
+        }
+
+        /* =========================================================
+           PARTY LIGHTS
+        ========================================================= */
+
+        .lights {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 45px;
+            z-index: 10;
+            pointer-events: none;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .light {
+            width: 16px;
+            height: 16px;
+            margin-bottom: 11px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px currentColor;
+            animation: blink 1.8s ease-in-out infinite;
+        }
+
+        .light:nth-child(1) { color: var(--pink); }
+        .light:nth-child(2) { color: var(--yellow); animation-delay: .3s; }
+        .light:nth-child(3) { color: var(--blue); animation-delay: .6s; }
+        .light:nth-child(4) { color: var(--purple); animation-delay: .9s; }
+        .light:nth-child(5) { color: var(--orange); animation-delay: 1.2s; }
+        .light:nth-child(6) { color: var(--green); animation-delay: 1.5s; }
+        .light:nth-child(7) { color: var(--pink); animation-delay: .4s; }
+        .light:nth-child(8) { color: var(--yellow); animation-delay: .8s; }
+        .light:nth-child(9) { color: var(--blue); animation-delay: 1.1s; }
+        .light:nth-child(10) { color: var(--purple); animation-delay: .2s; }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: .45;
+                transform: scale(.85);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        /* =========================================================
+           MAIN SCENE
+        ========================================================= */
+
+        .party {
+            position: relative;
+            min-height: 100vh;
+            padding: 40px 20px 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =========================================================
+           BANNER
+        ========================================================= */
+
+        .banner {
+            position: relative;
+            z-index: 5;
+            width: 98vw;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .banner-panel {
+            display: inline-block;
+            margin-top: 20px;
+            transform: rotate(-1deg);
+        }
+
+        .headline {
+            margin: 0;
+            font-family: "Pacifico", cursive;
+            font-size: clamp(4rem, 11vw, 11rem);
+            line-height: .95;
+            color: #d65d4b;
+            text-shadow:
+                0 4px 0 white,
+                0 8px 0 rgba(217, 95, 76, .15),
+                0 16px 28px rgba(217, 95, 76, .22);
+        }
+
+        .headline span {
+            display: block;
+            font-size: .48em;
+            color: #5869a9;
+            letter-spacing: .5px;
+            margin-top: 6px;
+            transform: rotate(1.5deg);
+        }
+
+        /* =========================================================
+           PARTY AREA
+        ========================================================= */
+
+        .scene {
+            position: relative;
+            width: min(1150px, 100%);
+            min-height: 640px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scene--full-roster {
+            min-height: 900px;
+        }
+
+        /* =========================================================
+           BALLOONS
+        ========================================================= */
+
+        #balloons {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .balloon-wrap {
+            position: absolute;
+            width: 195px;
+            text-align: center;
+            --balloon-scale: 1;
+            --drift-x: 0px;
+            --drift-y: -22px;
+            animation: balloonFloat 7s ease-in-out infinite alternate;
+        }
+
+        .balloon-wrap--name {
+            width: 168px;
+            animation: none;
+        }
+
+        .balloon-wrap--name .balloon {
+            width: 155px;
+            height: 186px;
+            padding: 24px 14px 34px;
+            font-size: 1.35rem;
+        }
+
+        .balloon-wrap--name .string {
+            height: 75px;
+        }
+
+        .balloon {
+            position: relative;
+            width: 165px;
+            height: 200px;
+            margin: auto;
+            border-radius: 50% 50% 48% 48%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px 40px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.45rem;
+            line-height: 1.05;
+            text-align: center;
+            text-shadow: 0 2px 2px rgba(0,0,0,.15);
+
+            box-shadow:
+                inset -14px -16px 22px rgba(0,0,0,.12),
+                inset 10px 8px 15px rgba(255,255,255,.35),
+                0 8px 15px rgba(80,50,70,.12);
+        }
+
+        .balloon::before {
+            content: "";
+            position: absolute;
+            top: 22px;
+            left: 30px;
+            width: 27px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.35);
+            transform: rotate(25deg);
+        }
+
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 13px;
+            background: inherit;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+
+        .string {
+            width: 2px;
+            height: 200px;
+            margin: -1px auto 0;
+            background: rgba(80,70,80,.35);
+            transform-origin: top;
+        }
+
+        @keyframes balloonFloat {
+            from {
+                transform: translateY(0) rotate(-2deg) scale(var(--balloon-scale));
+            }
+
+            to {
+                transform: translate(var(--drift-x), var(--drift-y)) rotate(3deg) scale(var(--balloon-scale));
+            }
+        }
+
+        /* Balloon positions */
+
+        .balloon-wrap:nth-child(1) {
+            left: 1%;
+            top: 12%;
+        }
+
+        .balloon-wrap:nth-child(2) {
+            left: 12%;
+            top: 50%;
+            animation-delay: -1.2s;
+        }
+
+        .balloon-wrap:nth-child(3) {
+            left: 22%;
+            top: 3%;
+            animation-delay: -2.2s;
+        }
+
+        .balloon-wrap:nth-child(4) {
+            right: 22%;
+            top: 5%;
+            animation-delay: -1.5s;
+        }
+
+        .balloon-wrap:nth-child(5) {
+            right: 11%;
+            top: 50%;
+            animation-delay: -2.8s;
+        }
+
+        .balloon-wrap:nth-child(6) {
+            right: 1%;
+            top: 13%;
+            animation-delay: -.8s;
+        }
+
+        .balloon-wrap:nth-child(7) {
+            left: 4%;
+            bottom: 0;
+            animation-delay: -3s;
+        }
+
+        .balloon-wrap:nth-child(8) {
+            right: 4%;
+            bottom: 0;
+            animation-delay: -1.8s;
+        }
+
+        /* =========================================================
+           CAKE
+        ========================================================= */
+
+        .cake-area {
+            position: relative;
+            z-index: 5;
+            width: 470px;
+            max-width: 90vw;
+            height: 440px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            transform: scale(1.3);
+        }
+
+        .cake-glow {
+            position: absolute;
+            width: 430px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(72, 185, 189, .22);
+            filter: blur(45px);
+            bottom: 45px;
+        }
+
+        .cake {
+            position: relative;
+            width: 390px;
+            height: 370px;
+            filter: drop-shadow(0 20px 20px rgba(80,50,70,.15));
+            animation: cakeBounce 4s ease-in-out infinite;
+        }
+
+        @keyframes cakeBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        /* Cake plate */
+
+        .plate {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 360px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(#ffffff, #e9dff0);
+            border: 4px solid #dacde4;
+        }
+
+        .plate::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 12px;
+            left: 50%;
+            top: 8px;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: rgba(169,140,255,.22);
+        }
+
+        /* Bottom cake */
+
+        .layer {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 18px 18px 25px 25px;
+            overflow: visible;
+        }
+
+        .bottom-layer {
+            bottom: 40px;
+            width: 315px;
+            height: 125px;
+            background:
+                linear-gradient(
+                    90deg,
+                    #df876f 0%,
+                    #efa783 25%,
+                    #da7a68 50%,
+                    #eead89 75%,
+                    #d96e60 100%
+                );
+            border: 4px solid #bd685d;
+        }
+
+        .middle-layer {
+            bottom: 145px;
+            width: 265px;
+            height: 105px;
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffe2a0,
+                    #fff0bc,
+                    #ffd779,
+                    #ffecb0
+                );
+            border: 4px solid #e4bc55;
+        }
+
+        .top-layer {
+            bottom: 235px;
+            width: 205px;
+            height: 90px;
+            background:
+                linear-gradient(
+                    90deg,
+                    #7e91c9,
+                    #a7b4da,
+                    #7182ba,
+                    #9eadda
+                );
+            border: 4px solid #5f70a9;
+        }
+
+        /* Icing */
+
+        .icing {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 25px;
+            border-radius: 50%;
+            background: #fff8fb;
+            border: 3px solid rgba(255,255,255,.8);
+            z-index: 2;
+        }
+
+        .icing-bottom {
+            bottom: 145px;
+            width: 325px;
+        }
+
+        .icing-middle {
+            bottom: 235px;
+            width: 275px;
+        }
+
+        .icing-top {
+            bottom: 310px;
+            width: 215px;
+        }
+
+        /* Drips */
+
+        .drip {
+            position: absolute;
+            width: 18px;
+            border-radius: 0 0 20px 20px;
+            background: #fff8fb;
+            z-index: 3;
+        }
+
+        .drip.one {
+            bottom: 127px;
+            left: 105px;
+            height: 35px;
+        }
+
+        .drip.two {
+            bottom: 127px;
+            right: 100px;
+            height: 25px;
+        }
+
+        .drip.three {
+            bottom: 217px;
+            left: 160px;
+            height: 30px;
+        }
+
+        .drip.four {
+            bottom: 292px;
+            right: 155px;
+            height: 27px;
+        }
+
+        /* Cake decorations */
+
+        .dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            z-index: 5;
+        }
+
+        .dot.pink { background: var(--hot-pink); }
+        .dot.blue { background: var(--blue); }
+        .dot.yellow { background: var(--yellow); }
+        .dot.purple { background: var(--purple); }
+        .dot.green { background: var(--green); }
+        .dot.orange { background: var(--orange); }
+
+        .dot.small { width: 8px; height: 8px; }
+        .dot.large { width: 15px; height: 15px; }
+
+        .d1 { bottom: 75px; left: 105px; }
+        .d2 { bottom: 90px; left: 150px; }
+        .d3 { bottom: 70px; right: 110px; }
+        .d4 { bottom: 105px; right: 150px; }
+        .d5 { bottom: 180px; left: 130px; }
+        .d6 { bottom: 200px; right: 120px; }
+        .d7 { bottom: 270px; left: 90px; }
+        .d8 { bottom: 280px; right: 95px; }
+        .d9 { bottom: 58px; left: 165px; }
+        .d10 { bottom: 88px; right: 170px; }
+
+        /* Candles */
+
+        .candles {
+            position: absolute;
+            z-index: 10;
+            bottom: 315px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 18px;
+        }
+
+        .candle {
+            position: relative;
+            width: 16px;
+            height: 65px;
+            border-radius: 6px;
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    #fff 0 8px,
+                    #48b9bd 8px 16px
+                );
+            border: 2px solid rgba(100,60,80,.12);
+        }
+
+        .flame {
+            position: absolute;
+            left: 50%;
+            top: -32px;
+            width: 20px;
+            height: 29px;
+            transform: translateX(-50%);
+            border-radius: 55% 55% 55% 55%;
+            background:
+                radial-gradient(
+                    circle at 50% 70%,
+                    #fff7a0 0 25%,
+                    #ffc247 26% 60%,
+                    #ff7b38 61% 100%
+                );
+            box-shadow: 0 0 20px #ffbd48;
+            animation: flame 1s ease-in-out infinite;
+        }
+
+        .candle:nth-child(2) .flame {
+            animation-delay: -.2s;
+        }
+
+        .candle:nth-child(3) .flame {
+            animation-delay: -.4s;
+        }
+
+        .candle:nth-child(4) .flame {
+            animation-delay: -.7s;
+        }
+
+        @keyframes flame {
+            0%, 100% {
+                transform: translateX(-50%) scale(1) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(.9, 1.1) rotate(3deg);
+            }
+        }
+
+        /* =========================================================
+           MESSAGE
+        ========================================================= */
+
+        .message {
+            position: relative;
+            z-index: 7;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .message h2 {
+            margin: 0;
+            font-family: "Pacifico", cursive;
+            font-size: clamp(1.5rem, 4vw, 2.3rem);
+            font-weight: 400;
+            color: #53688d;
+        }
+
+        .message p {
+            margin: 6px auto 0;
+            max-width: 600px;
+            font-size: 1rem;
+            color: #67777b;
+        }
+
+        #status {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 9px 20px;
+            border-radius: 999px;
+            background: white;
+            border: 3px solid #d9e4dc;
+            box-shadow: 0 6px 20px rgba(100,70,100,.08);
+            font-weight: 600;
+        }
+
+        /* =========================================================
+           GROUND DECORATIONS
+        ========================================================= */
+
+        .ground {
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 2;
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    rgba(255,255,255,.9),
+                    rgba(255,255,255,0) 70%
+                );
+        }
+
+        /* Gift boxes flanking the cake */
+
+        .gift {
+            position: absolute;
+            bottom: 30px;
+            width: 68px;
+            height: 58px;
+            border-radius: 6px;
+            z-index: 4;
+            box-shadow: 0 10px 15px rgba(80,50,70,.15);
+        }
+
+        .gift--left {
+            left: 12%;
+            background: var(--blue);
+            transform: rotate(-6deg);
+        }
+
+        .gift--right {
+            right: 12%;
+            background: var(--pink);
+            transform: rotate(7deg);
+        }
+
+        .gift-lid {
+            position: absolute;
+            top: -12px;
+            left: -6px;
+            right: -6px;
+            height: 16px;
+            border-radius: 6px;
+            background: inherit;
+            filter: brightness(1.18);
+        }
+
+        .gift-ribbon-v {
+            position: absolute;
+            top: -12px;
+            bottom: 0;
+            left: 50%;
+            width: 12px;
+            transform: translateX(-50%);
+            background: var(--yellow);
+        }
+
+        .gift-ribbon-h {
+            position: absolute;
+            top: 18px;
+            left: -6px;
+            right: -6px;
+            height: 12px;
+            background: var(--yellow);
+        }
+
+        .gift-bow {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            width: 26px;
+            height: 16px;
+            transform: translateX(-50%);
+            background: var(--yellow);
+            border-radius: 50% 50% 0 0;
+            clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .star {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            background: var(--yellow);
+            clip-path: polygon(
+                50% 0%,
+                61% 38%,
+                100% 50%,
+                61% 62%,
+                50% 100%,
+                39% 62%,
+                0% 50%,
+                39% 38%
+            );
+            animation: starPop 2.5s ease-in-out infinite;
+        }
+
+        .star.s1 {
+            top: 25%;
+            left: 31%;
+        }
+
+        .star.s2 {
+            top: 35%;
+            right: 31%;
+            background: var(--pink);
+            animation-delay: -.7s;
+        }
+
+        .star.s3 {
+            top: 66%;
+            left: 32%;
+            background: var(--blue);
+            animation-delay: -1.3s;
+        }
+
+        .star.s4 {
+            top: 65%;
+            right: 32%;
+            background: var(--purple);
+            animation-delay: -1.8s;
+        }
+
+        @keyframes starPop {
+            0%, 100% {
+                transform: scale(.8) rotate(0deg);
+                opacity: .6;
+            }
+
+            50% {
+                transform: scale(1.15) rotate(15deg);
+                opacity: 1;
+            }
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 800px) {
+
+            .party {
+                padding-top: 55px;
+            }
+
+            .headline {
+                font-size: clamp(3rem, 17vw, 5rem);
+            }
+
+            .scene {
+                min-height: 700px;
+            }
+
+            .scene.scene--full-roster {
+                min-height: 2000px;
+            }
+
+            .cake-area {
+                transform: scale(.78);
+                margin-top: -20px;
+            }
+
+            .balloon-wrap {
+                --balloon-scale: .72;
+            }
+
+            .balloon-wrap:nth-child(1) {
+                left: -15px;
+                top: 12%;
+            }
+
+            .balloon-wrap:nth-child(2) {
+                left: -15px;
+                top: 55%;
+            }
+
+            .balloon-wrap:nth-child(3) {
+                left: 5%;
+                top: 0;
+            }
+
+            .balloon-wrap:nth-child(4) {
+                right: 5%;
+                top: 0;
+            }
+
+            .balloon-wrap:nth-child(5) {
+                right: -15px;
+                top: 55%;
+            }
+
+            .balloon-wrap:nth-child(6) {
+                right: -15px;
+                top: 12%;
+            }
+
+            .balloon-wrap:nth-child(7),
+            .balloon-wrap:nth-child(8) {
+                display: none;
+            }
+
+            .star {
+                display: none;
+            }
+
+            .gift {
+                display: none;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .party {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .headline {
+                margin-top: 8px;
+            }
+
+            .scene {
+                min-height: 620px;
+            }
+
+            .scene.scene--full-roster {
+                min-height: 1800px;
+            }
+
+            .cake-area {
+                transform: scale(.62);
+                margin-top: -45px;
+            }
+
+            .balloon-wrap {
+                --balloon-scale: .55;
+            }
+
+            .balloon-wrap:nth-child(1),
+            .balloon-wrap:nth-child(6) {
+                top: 18%;
+            }
+
+            .balloon-wrap:nth-child(2),
+            .balloon-wrap:nth-child(5) {
+                top: 58%;
+            }
+
+            .message {
+                margin-top: -40px;
+            }
+
+            #status {
+                font-size: .85rem;
+                max-width: 90vw;
+            }
+        }
+
+        /* Accessibility */
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         PARTY LIGHTS
+    ========================================================== -->
+
+    <div class="lights" aria-hidden="true">
+        <span class="light"></span>
+        <span class="light"></span>
+        <span class="light"></span>
+        <span class="light"></span>
+        <span class="light"></span>
+        <span class="light"></span>
+        <span class="light"></span>
+        <span class="light"></span>
+        <span class="light"></span>
+        <span class="light"></span>
+    </div>
+
+    <!-- Confetti -->
+    <div id="confetti" aria-hidden="true"></div>
+
+    <!-- Streamers -->
+    <div class="streamers" aria-hidden="true">
+        <div class="streamers-string"></div>
+        <div class="streamers-row">
+            <span class="pennant"></span><span class="pennant"></span><span class="pennant"></span>
+            <span class="pennant"></span><span class="pennant"></span><span class="pennant"></span>
+            <span class="pennant"></span><span class="pennant"></span><span class="pennant"></span>
+            <span class="pennant"></span><span class="pennant"></span><span class="pennant"></span>
+            <span class="pennant"></span><span class="pennant"></span><span class="pennant"></span>
+            <span class="pennant"></span>
+        </div>
+    </div>
+
+    <main class="party">
+
+        <!-- =====================================================
+             BIRTHDAY BANNER
+        ====================================================== -->
+
+        <header class="banner">
+
+            <div class="banner-panel">
+                <h1 class="headline">
+                    Happy Birthday!
+                    <span>Let's Celebrate!</span>
+                </h1>
+            </div>
+
+        </header>
+
+        <!-- =====================================================
+             MAIN PARTY SCENE
+        ====================================================== -->
+
+        <section class="scene">
+
+            <!-- Decorative stars -->
+            <span class="star s1"></span>
+            <span class="star s2"></span>
+            <span class="star s3"></span>
+            <span class="star s4"></span>
+
+            <!-- =================================================
+                 NAME BALLOONS
+            ================================================== -->
+
+            <div id="balloons" aria-label="Birthday balloons"></div>
+
+            <!-- =================================================
+                 CAKE
+            ================================================== -->
+
+            <div class="cake-area">
+
+                <div class="cake-glow"></div>
+
+                <div class="cake" role="img" aria-label="Birthday cake with candles">
+
+                    <div class="candles">
+                        <div class="candle">
+                            <span class="flame"></span>
+                        </div>
+
+                        <div class="candle">
+                            <span class="flame"></span>
+                        </div>
+
+                        <div class="candle">
+                            <span class="flame"></span>
+                        </div>
+
+                        <div class="candle">
+                            <span class="flame"></span>
+                        </div>
+                    </div>
+
+                    <div class="icing icing-top"></div>
+                    <div class="icing icing-middle"></div>
+                    <div class="icing icing-bottom"></div>
+
+                    <div class="layer top-layer"></div>
+                    <div class="layer middle-layer"></div>
+                    <div class="layer bottom-layer"></div>
+
+                    <div class="drip one"></div>
+                    <div class="drip two"></div>
+                    <div class="drip three"></div>
+                    <div class="drip four"></div>
+
+                    <span class="dot pink d1"></span>
+                    <span class="dot blue d2"></span>
+                    <span class="dot yellow d3"></span>
+                    <span class="dot purple d4"></span>
+                    <span class="dot green small d5"></span>
+                    <span class="dot orange small d6"></span>
+                    <span class="dot pink small d7"></span>
+                    <span class="dot blue small d8"></span>
+                    <span class="dot yellow large d9"></span>
+                    <span class="dot purple large d10"></span>
+
+                    <div class="plate"></div>
+
+                </div>
+
+            </div>
+
+            <div class="ground"></div>
+
+            <!-- Gift boxes -->
+            <div class="gift gift--left">
+                <div class="gift-lid"></div>
+                <div class="gift-ribbon-v"></div>
+                <div class="gift-ribbon-h"></div>
+                <div class="gift-bow"></div>
+            </div>
+            <div class="gift gift--right">
+                <div class="gift-lid"></div>
+                <div class="gift-ribbon-v"></div>
+                <div class="gift-ribbon-h"></div>
+                <div class="gift-bow"></div>
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             MESSAGE
+        ====================================================== -->
+
+        <section class="message">
+
+            <h2>🎉 Make a wish! 🎉</h2>
+
+            <p>
+                Wishing you a day filled with cake, laughter,
+                love, and lots of reasons to smile.
+            </p>
+
+            <div id="status">
+                Checking today's birthday celebrations...
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /* =========================================================
+           PEOPLE
+           
+           Add or remove people here.
+           
+           Birthday format:
+           MM-DD
+        ========================================================= */
+
+        const people = [
+            { name: "Liz Sepulveda", birthday: "07-05" },
+            { name: "Christian Vasquez", birthday: "07-09" },
+            { name: "Javier Rocha", birthday: "07-09" },
+            { name: "Jessica Pulido", birthday: "07-10" },
+            { name: "Angela Balderas", birthday: "07-13" },
+            { name: "Maricela Becerra", birthday: "08-01" },
+            { name: "William Rutherford", birthday: "08-10" },
+            { name: "Shelleasa Madden", birthday: "08-12" },
+            { name: "Jesse Vang", birthday: "08-15" },
+            { name: "Beth Wilson", birthday: "08-17" },
+            { name: "Bernie Lee", birthday: "08-19" },
+            { name: "Mark Zachreus", birthday: "08-25" },
+            { name: "Tina Jamison", birthday: "08-29" },
+            { name: "Rosa Vallejo", birthday: "09-03" },
+            { name: "Debbie Prak", birthday: "09-08" },
+            { name: "Jessica Juarez", birthday: "09-09" },
+            { name: "Hermenia Johannes", birthday: "09-09" },
+            { name: "Carolyn Wheeler", birthday: "09-10" },
+            { name: "Richard Hyske", birthday: "09-12" },
+            { name: "Nic Ortega", birthday: "09-14" },
+            { name: "Kathy Maez", birthday: "09-15" },
+            { name: "Exselia Carillo", birthday: "09-16" },
+            { name: "Noah Bertolero", birthday: "09-19" },
+            { name: "Michael McDowell", birthday: "09-20" },
+            { name: "Marlene Cervantes", birthday: "09-21" }
+        ];
+
+
+        /* =========================================================
+           BALLOON COLORS
+        ========================================================= */
+
+        const balloonColors = [
+            "rgba(238,118,95,.78)",
+            "rgba(244,201,93,.78)",
+            "rgba(72,185,189,.78)",
+            "rgba(115,130,198,.78)",
+            "rgba(232,154,75,.78)",
+            "rgba(121,184,117,.78)",
+            "rgba(196,107,122,.78)",
+            "rgba(95,159,203,.78)"
+        ];
+
+
+        /* =========================================================
+           DATE HELPERS
+        ========================================================= */
+
+        function parseDateOnly(dateString) {
+
+            const [month, day] =
+                dateString.split("-").map(Number);
+
+            return new Date(2000, month - 1, day);
+        }
+
+
+        function addMonthsSafe(date, months) {
+
+            const result = new Date(date);
+
+            const originalDay = result.getDate();
+
+            result.setDate(1);
+
+            result.setMonth(result.getMonth() + months);
+
+            const lastDay =
+                new Date(
+                    result.getFullYear(),
+                    result.getMonth() + 1,
+                    0
+                ).getDate();
+
+            result.setDate(
+                Math.min(originalDay, lastDay)
+            );
+
+            return result;
+        }
+
+
+        function isSameMonthDay(dateA, dateB) {
+
+            return (
+                dateA.getMonth() === dateB.getMonth() &&
+                dateA.getDate() === dateB.getDate()
+            );
+        }
+
+
+        /* =========================================================
+           FIND QUARTER BIRTHDAYS
+           
+           3 months
+           6 months
+           9 months
+           12 months
+        ========================================================= */
+
+        function getQuarterCelebrants(targetDate) {
+
+            const quarterSteps = [3, 6, 9, 12];
+
+            const celebrating = [];
+
+            people.forEach(person => {
+
+                const birthDate =
+                    parseDateOnly(person.birthday);
+
+                for (const months of quarterSteps) {
+
+                    const celebrationDate =
+                        addMonthsSafe(
+                            birthDate,
+                            months
+                        );
+
+                    if (
+                        isSameMonthDay(
+                            celebrationDate,
+                            targetDate
+                        )
+                    ) {
+
+                        celebrating.push(person.name);
+
+                        break;
+                    }
+                }
+            });
+
+            return celebrating;
+        }
+
+
+        /* =========================================================
+           CREATE BALLOON
+        ========================================================= */
+
+        function createBalloon(name, index, total) {
+
+            const wrapper =
+                document.createElement("div");
+
+            wrapper.className = "balloon-wrap";
+
+            /*
+             * Keep the first six balloons around the
+             * edges. Extra balloons are given random-ish
+             * positions.
+             */
+
+            if (total > 6) {
+
+                wrapper.classList.add("balloon-wrap--name");
+
+            } else if (index >= 6) {
+
+                const side =
+                    index % 2 === 0 ? "left" : "right";
+
+                wrapper.style[side] =
+                    `${5 + ((index * 11) % 22)}%`;
+
+                wrapper.style.top =
+                    `${10 + ((index * 19) % 70)}%`;
+            }
+
+            wrapper.style.animationDelay =
+                `${-(index * 0.8)}s`;
+
+            const balloon =
+                document.createElement("div");
+
+            balloon.className = "balloon";
+
+            balloon.textContent = name;
+
+            balloon.style.background =
+                balloonColors[
+                    index % balloonColors.length
+                ];
+
+            const string =
+                document.createElement("div");
+
+            string.className = "string";
+
+            wrapper.appendChild(balloon);
+            wrapper.appendChild(string);
+
+            return wrapper;
+        }
+
+
+        function floatAroundScreen(wrapper, container, index) {
+
+            const launchDelay =
+                300 + ((index * 911) % 5000);
+
+            wrapper.style.visibility = "hidden";
+
+            let left = 0;
+
+            let top = 0;
+
+            const move = () => {
+
+                if (!wrapper.isConnected) {
+                    return;
+                }
+
+                const maxLeft =
+                    Math.max(0, container.clientWidth - wrapper.offsetWidth);
+
+                const maxTop =
+                    Math.max(0, container.clientHeight - wrapper.offsetHeight);
+
+                const nextLeft =
+                    Math.round(Math.random() * maxLeft);
+
+                const nextTop =
+                    Math.round(Math.random() * maxTop);
+
+                const animation =
+                    wrapper.animate(
+                        [
+                            {
+                                left: `${left}px`,
+                                top: `${top}px`,
+                                transform: "rotate(-2deg)"
+                            },
+                            {
+                                left: `${nextLeft}px`,
+                                top: `${nextTop}px`,
+                                transform: "rotate(2deg)"
+                            }
+                        ],
+                        {
+                            duration: 18000 + ((index * 983) % 12000),
+                            easing: "ease-in-out",
+                            fill: "forwards"
+                        }
+                    );
+
+                animation.onfinish = () => {
+
+                    animation.cancel();
+
+                    left = nextLeft;
+                    top = nextTop;
+
+                    wrapper.style.left = `${left}px`;
+                    wrapper.style.top = `${top}px`;
+
+                    move();
+                };
+            };
+
+            window.setTimeout(
+                () => {
+
+                    if (!wrapper.isConnected) {
+                        return;
+                    }
+
+                    const maxLeft =
+                        Math.max(0, container.clientWidth - wrapper.offsetWidth);
+
+                    const maxTop =
+                        Math.max(0, container.clientHeight - wrapper.offsetHeight);
+
+                    left = (index * 137) % Math.max(1, maxLeft);
+                    top = (index * 83) % Math.max(1, maxTop);
+
+                    wrapper.style.left = `${left}px`;
+                    wrapper.style.top = `${top}px`;
+                    wrapper.style.right = "auto";
+                    wrapper.style.visibility = "visible";
+
+                    move();
+                },
+                launchDelay
+            );
+        }
+
+
+        /* =========================================================
+           RENDER BALLOONS
+        ========================================================= */
+
+        function renderBalloons() {
+
+            const today = new Date();
+
+            const celebrating =
+                getQuarterCelebrants(today);
+
+            const container =
+                document.getElementById("balloons");
+
+            const status =
+                document.getElementById("status");
+
+            const scene =
+                container.closest(".scene");
+
+            container.innerHTML = "";
+
+            scene.classList.toggle(
+                "scene--full-roster",
+                false
+            );
+
+
+            /*
+             * If someone is celebrating today,
+             * put their names on the balloons.
+             */
+
+            if (celebrating.length > 0) {
+
+                status.innerHTML =
+                    `🎈 Today we're celebrating: <strong>${celebrating.join(", ")}</strong> 🎉`;
+
+            } else {
+
+                /*
+                 * No quarter birthdays today.
+                 */
+
+                status.textContent =
+                    "🎈 Celebrating our third-quarter birthdays! 🎉";
+            }
+
+            const activeBalloonCount =
+                people.length;
+
+            people.slice(0, activeBalloonCount).forEach(
+                (person, index) => {
+
+                    const balloon =
+                        createBalloon(
+                            person.name,
+                            index,
+                            people.length
+                        );
+
+                    container.appendChild(
+                        balloon
+                    );
+
+                    floatAroundScreen(
+                        balloon,
+                        container,
+                        index
+                    );
+                }
+            );
+        }
+
+
+        /* =========================================================
+           CONFETTI
+        ========================================================= */
+
+        function createConfetti() {
+
+            const container =
+                document.getElementById("confetti");
+
+            const colors = [
+                "#ee765f",
+                "#f4c95d",
+                "#48b9bd",
+                "#7382c6",
+                "#e89a4b",
+                "#79b875"
+            ];
+
+            const amount = 120;
+
+            for (let i = 0; i < amount; i++) {
+
+                const piece =
+                    document.createElement("span");
+
+                piece.className = "confetti";
+
+                piece.style.left =
+                    `${Math.random() * 100}%`;
+
+                piece.style.background =
+                    colors[
+                        Math.floor(
+                            Math.random() * colors.length
+                        )
+                    ];
+
+                piece.style.width =
+                    `${5 + Math.random() * 6}px`;
+
+                piece.style.height =
+                    `${8 + Math.random() * 9}px`;
+
+                piece.style.animationDuration =
+                    `${6 + Math.random() * 8}s`;
+
+                piece.style.animationDelay =
+                    `${-Math.random() * 10}s`;
+
+                piece.style.transform =
+                    `rotate(${Math.random() * 360}deg)`;
+
+                container.appendChild(piece);
+            }
+        }
+
+
+        /* =========================================================
+           START PARTY
+        ========================================================= */
+
+        createConfetti();
+
+        renderBalloons();
+
+        window.addEventListener("resize", renderBalloons);
+
+    </script>
+
+</body>
+</html>
